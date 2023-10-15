@@ -21,13 +21,11 @@ typedef tree<pair<long long, int>, null_type, less<pair<long long, int>>,
 long long merge(vector<int> &v, int left, int middle, int right, long long t) {
     ordered_set or_set;
     long long sum{}, total{};
-    // Llenamos el tree con las sumas parciales de la primera mitad del array
     for (int i = middle; i >= left; i--) {
         sum += v[i];
         or_set.insert(make_pair(sum, i));
     }
     sum = 0;
-    // De la segunda mitad buscamos los elmentos con suma menor a t - sum
     for (int i = middle + 1; i <= right; i++) {
         sum += v[i];
         total += or_set.order_of_key(make_pair(t - sum, -1));
@@ -60,7 +58,7 @@ int main() {
         arr.push_back(j);
     }
     cout << subarrays_sum_less_than(arr, 0, arr.size() - 1, t);
-    
+    //        cout << merge(arr, 0, 1, arr.size() - 1, t);
 
     return 0;
 }
